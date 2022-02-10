@@ -1,0 +1,23 @@
+.todoListWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.todoList {
+  width: 100%;
+}
+
+.todoList > *:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.loadMoreButton {
+  margin-top: 30px;
+}
+
+.loadMoreLoader {
+  margin: 0 auto;
+}

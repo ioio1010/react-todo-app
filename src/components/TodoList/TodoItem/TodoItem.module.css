@@ -1,0 +1,15 @@
+.todoItem {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  opacity: 1;
+}
+
+.todoItemTitle {
+  overflow: hidden;
+  overflow-wrap: break-word;
+  padding-right: 5px;
+}

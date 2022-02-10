@@ -1,0 +1,17 @@
+.todoFormWrapper {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.todoForm {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.addButton {
+  margin-top: 15px;
+}
