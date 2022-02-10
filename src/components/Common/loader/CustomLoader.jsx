@@ -2,10 +2,9 @@ import React from "react";
 import classes from "./CustomLoader.module.css";
 
 const CustomLoader = (props) => {
-  let classesList = [classes.loader];
-  if (props.classnames) classesList = [...classesList, props.classnames];
-
-  return <div className={classesList.join(" ")} {...props}></div>;
+  return (
+    <div {...props} className={`${props.className} ${classes.loader}`}></div>
+  );
 };
 
 export default CustomLoader;

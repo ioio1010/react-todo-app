@@ -29,7 +29,7 @@ const TodoList = () => {
   };
 
   const renderLoader = isLoading ? (
-    <CustomLoader classnames={[classes.loadMoreLoader]} />
+    <CustomLoader className={`${classes.loadMoreLoader}`} />
   ) : null;
 
   const renderListItems = sortedTodoIds.map((todoId) => {
@@ -41,7 +41,7 @@ const TodoList = () => {
       <CustomButton
         onClick={handleLoadMore}
         disabled={isLoading}
-        classnames={[classes.loadMoreButton]}
+        className={`${classes.loadMoreButton}`}
       >
         Load more
       </CustomButton>

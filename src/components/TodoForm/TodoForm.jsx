@@ -71,7 +71,7 @@ const TodoForm = () => {
         <CustomButton
           onClick={handleClickAddButton}
           disabled={isAdding}
-          classnames={[classes.addButton]}
+          className={`${classes.addButton}`}
         >
           {addButtonText}
         </CustomButton>
