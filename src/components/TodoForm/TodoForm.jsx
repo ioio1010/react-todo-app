@@ -20,13 +20,13 @@ const TodoForm = () => {
   const [status, setStatus] = useState(TODO_FORM_STATUS.IDLE);
 
   const handleChangeTitle = (e) => setTitle(e.target.value);
-  const handleKeyDownTitle = async (e) => {
+  const handleKeyDownTitle = (e) => {
     if (e.which === 13) {
       e.preventDefault();
       addTodo();
     }
   };
-  const handleClickAddButton = async (e) => {
+  const handleClickAddButton = (e) => {
     e.preventDefault();
     addTodo();
   };
