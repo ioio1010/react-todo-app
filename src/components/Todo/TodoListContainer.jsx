@@ -27,6 +27,7 @@ const TodoListContainer = () => {
     <TodoList
       sortedTodos={sortedTodos}
       isLoading={status === TODO_LIST_STATUS.LOADING}
+      isLoadingError={status === TODO_LIST_STATUS.LOADING_ERROR}
       nextLoadSegmentPath={nextLoadSegmentPath}
       handleGetAll={handleGetAll}
       handleLoadMore={handleLoadMore}

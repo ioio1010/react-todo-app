@@ -21,3 +21,7 @@
 .loadMoreLoader {
   margin: 0 auto;
 }
+
+.errorBanner {
+  margin-bottom: 30px;
+}

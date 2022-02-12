@@ -5,10 +5,12 @@ import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { TODO_ENTITY_STATUS } from "../../store/todoSlice";
 import TodoItemContainer from "./TodoItem/TodoItemContainer";
+import ErrorBanner from "../Common/banner/ErrorBanner";
 
 const TodoList = ({
   sortedTodos,
   isLoading,
+  isLoadingError,
   nextLoadSegmentPath,
   handleGetAll,
   handleLoadMore,
@@ -16,6 +18,13 @@ const TodoList = ({
   useEffect(() => {
     handleGetAll();
   }, []);
+
+  const renderErrorBanner = isLoadingError ? (
+    <ErrorBanner
+      text={"Todo list loading error"}
+      className={`${classes.errorBanner}`}
+    />
+  ) : null;
 
   const renderLoader = isLoading ? (
     <CustomLoader className={`${classes.loadMoreLoader}`} />
@@ -38,6 +47,7 @@ const TodoList = ({
 
   return (
     <div className={classes.todoListWrapper}>
+      {renderErrorBanner}
       <ul className={classes.todoList}>
         {renderListItems}
         {renderLoader}
@@ -57,6 +67,7 @@ TodoList.propTypes = {
     })
   ).isRequired,
   isLoading: PropTypes.bool.isRequired,
+  isLoadingError: PropTypes.bool.isRequired,
   nextLoadSegmentPath: PropTypes.object,
   handleGetAll: PropTypes.func.isRequired,
   handleLoadMore: PropTypes.func.isRequired,
