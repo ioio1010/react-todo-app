@@ -1,6 +1,7 @@
 import classes from "./TodoItem.module.css";
 import CustomButton from "../../Common/button/CustomButton";
 import { TODO_ENTITY_STATUS } from "../../../store/todoSlice";
+import PropTypes from "prop-types";
 
 const TodoItem = ({ todo, handleRemoveTodo }) => {
   const isRemoving = todo.status === TODO_ENTITY_STATUS.REMOVING;
@@ -17,6 +18,15 @@ const TodoItem = ({ todo, handleRemoveTodo }) => {
       </CustomButton>
     </li>
   );
+};
+
+TodoItem.propTypes = {
+  todo: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    segmentPath: PropTypes.string.isRequired,
+  }).isRequired,
+  handleRemoveTodo: PropTypes.func.isRequired,
 };
 
 export default TodoItem;
