@@ -14,7 +14,7 @@ const TodoListContainer = () => {
   const status = useSelector(selectTodoStatus);
   const nextLoadSegmentPath = useSelector(selectTodoNextLoadSegmentPath);
 
-  const props = {
+  const todoListProps = {
     sortedTodos: sortedTodos,
     isLoading: status === TODO_LIST_STATUS.LOADING,
     nextLoadSegmentPath: nextLoadSegmentPath,
@@ -29,7 +29,7 @@ const TodoListContainer = () => {
     },
   };
 
-  return <TodoList {...props} />;
+  return <TodoList {...todoListProps} />;
 };
 
 export default TodoListContainer;

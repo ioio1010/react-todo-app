@@ -40,7 +40,7 @@ const TodoFormContainer = () => {
       });
   };
 
-  const props = {
+  const todoFormProps = {
     title: title,
     isAdding: isAdding,
     handleChangeTitle: (e) => {
@@ -58,7 +58,7 @@ const TodoFormContainer = () => {
     },
   };
 
-  return <TodoForm {...props} />;
+  return <TodoForm {...todoFormProps} />;
 };
 
 export default TodoFormContainer;

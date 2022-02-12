@@ -1,5 +1,4 @@
 import classes from "./TodoList.module.css";
-import TodoItem from "./TodoItem/TodoItem";
 import CustomLoader from "../Common/loader/CustomLoader";
 import CustomButton from "../Common/button/CustomButton";
 import { useEffect } from "react";
