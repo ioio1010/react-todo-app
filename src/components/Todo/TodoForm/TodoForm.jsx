@@ -1,6 +1,7 @@
 import classes from "./TodoForm.module.css";
 import CustomInput from "../../Common/input/CustomInput";
 import CustomButton from "../../Common/button/CustomButton";
+import PropTypes from "prop-types";
 
 const TodoForm = ({
   title,
@@ -32,6 +33,14 @@ const TodoForm = ({
       </form>
     </div>
   );
+};
+
+TodoForm.propTypes = {
+  title: PropTypes.string.isRequired,
+  isAdding: PropTypes.bool.isRequired,
+  handleChangeTitle: PropTypes.func.isRequired,
+  handleKeyDownTitle: PropTypes.func.isRequired,
+  handleClickAddButton: PropTypes.func.isRequired,
 };
 
 export default TodoForm;
