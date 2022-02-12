@@ -16,6 +16,7 @@ const TodoFormContainer = () => {
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState(TODO_FORM_STATUS.IDLE);
   const isAdding = status === TODO_FORM_STATUS.ADDING;
+  const isAddingError = status === TODO_FORM_STATUS.ADDING_ERROR;
 
   const addTodo = () => {
     const trimmedTitle = title.trim();
@@ -69,6 +70,7 @@ const TodoFormContainer = () => {
     <TodoForm
       title={title}
       isAdding={isAdding}
+      isAddingError={isAddingError}
       handleChangeTitle={handleChangeTitle}
       handleKeyDownTitle={handleKeyDownTitle}
       handleClickAddButton={handleClickAddButton}

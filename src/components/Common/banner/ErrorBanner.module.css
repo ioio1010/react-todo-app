@@ -1,4 +1,5 @@
 .errorBanner {
+    display: block;
     padding: 20px;
     background-color: deeppink;
     border-radius: 10px;
