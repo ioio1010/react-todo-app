@@ -9,12 +9,12 @@ import {
   query,
   startAfter,
 } from "firebase/firestore/lite";
+import { firestoreDB } from "../config/firebaseConfig";
 
 export class TodoAPI {
   static FIRESTORE_PATH = "todos";
 
   static async getAll(
-    firestoreDB,
     nextLoadSegmentPath,
     orderField = "createdAt",
     orderFieldDirection = "desc",
@@ -50,7 +50,7 @@ export class TodoAPI {
     };
   }
 
-  static async add(todo, firestoreDB) {
+  static async add(todo) {
     const response = await addDoc(
       collection(firestoreDB, TodoAPI.FIRESTORE_PATH),
       todo
@@ -61,7 +61,7 @@ export class TodoAPI {
     return todo;
   }
 
-  static async remove(segmentPath, firestoreDB) {
+  static async remove(segmentPath) {
     await deleteDoc(doc(firestoreDB, TodoAPI.FIRESTORE_PATH, segmentPath));
   }
 }

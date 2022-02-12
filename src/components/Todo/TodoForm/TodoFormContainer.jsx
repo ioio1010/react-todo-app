@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import TodoForm from "./TodoForm";
 import { idGenerator } from "../../../utils/idGenerator";
 import { TodoAPI } from "../../../api/todoAPI";
-import { firestoreDB } from "../../../config/firebaseConfig";
 import { todoAdded } from "../../../store/todoSlice";
 import { useDispatch } from "react-redux";
 
@@ -30,7 +29,7 @@ const TodoFormContainer = () => {
 
     setStatus(TODO_FORM_STATUS.ADDING);
 
-    TodoAPI.add(todo, firestoreDB)
+    TodoAPI.add(todo)
       .then((response) => {
         dispatch(todoAdded(response));
         setStatus(TODO_FORM_STATUS.IDLE);

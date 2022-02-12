@@ -1,6 +1,5 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { TodoAPI } from "../api/todoAPI";
-import { firestoreDB } from "../config/firebaseConfig";
 
 export const TODO_LIST_STATUS = {
   IDLE: "idle",
@@ -91,7 +90,7 @@ export class TodosThunk {
     return async (dispatch) => {
       dispatch(todosLoading());
 
-      TodoAPI.getAll(firestoreDB, nextLoadSegmentPath)
+      TodoAPI.getAll(nextLoadSegmentPath)
         .then((response) => dispatch(todosLoaded(response)))
         .catch(() => dispatch(todosLoadedFailure()));
     };
@@ -101,7 +100,7 @@ export class TodosThunk {
     return async (dispatch) => {
       dispatch(todoRemoving(todo));
 
-      TodoAPI.remove(todo.segmentPath, firestoreDB)
+      TodoAPI.remove(todo.segmentPath)
         .then((response) => dispatch(todoRemoved(todo)))
         .catch(() => dispatch(todoRemovedFailure()));
     };
