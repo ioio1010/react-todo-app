@@ -3,6 +3,7 @@ import TodoItem from "./TodoItem/TodoItem";
 import CustomLoader from "../Common/loader/CustomLoader";
 import CustomButton from "../Common/button/CustomButton";
 import { useEffect } from "react";
+import PropTypes from "prop-types";
 
 const TodoList = ({
   sortedTodos,
@@ -46,6 +47,19 @@ const TodoList = ({
       {renderLoadMoreButton}
     </div>
   );
+};
+
+TodoList.propTypes = {
+  sortedTodos: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  nextLoadSegmentPath: PropTypes.object,
+  handleGetAll: PropTypes.func.isRequired,
+  handleLoadMore: PropTypes.func.isRequired,
+  handleRemoveTodo: PropTypes.func.isRequired,
+};
+
+TodoList.defaultProps = {
+  nextLoadSegmentPath: null,
 };
 
 export default TodoList;
