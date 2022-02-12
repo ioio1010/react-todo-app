@@ -4,6 +4,7 @@ import {
   selectSortedTodos,
   selectTodoNextLoadSegmentPath,
   selectTodoStatus,
+  TODO_LIST_STATUS,
   TodosThunk,
 } from "../../store/todoSlice";
 
@@ -15,7 +16,7 @@ const TodoListContainer = () => {
 
   const props = {
     sortedTodos: sortedTodos,
-    status: status,
+    isLoading: status === TODO_LIST_STATUS.LOADING,
     nextLoadSegmentPath: nextLoadSegmentPath,
     handleGetAll: () => {
       return dispatch(TodosThunk.getAll());

@@ -1,13 +1,12 @@
 import classes from "./TodoList.module.css";
 import TodoItem from "./TodoItem/TodoItem";
-import { TODO_LIST_STATUS } from "../../store/todoSlice";
 import CustomLoader from "../Common/loader/CustomLoader";
 import CustomButton from "../Common/button/CustomButton";
 import { useEffect } from "react";
 
 const TodoList = ({
   sortedTodos,
-  status,
+  isLoading,
   nextLoadSegmentPath,
   handleGetAll,
   handleLoadMore,
@@ -16,8 +15,6 @@ const TodoList = ({
   useEffect(() => {
     handleGetAll();
   }, []);
-
-  const isLoading = status === TODO_LIST_STATUS.LOADING;
 
   const renderLoader = isLoading ? (
     <CustomLoader className={`${classes.loadMoreLoader}`} />
