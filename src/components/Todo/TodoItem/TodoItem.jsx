@@ -3,8 +3,7 @@ import CustomButton from "../../Common/button/CustomButton";
 import { TODO_ENTITY_STATUS } from "../../../store/todoSlice";
 import PropTypes from "prop-types";
 
-const TodoItem = ({ todo, handleRemoveTodo }) => {
-  const isRemoving = todo.status === TODO_ENTITY_STATUS.REMOVING;
+const TodoItem = ({ todo, isRemoving, handleRemoveTodo }) => {
   const removeButtonText = isRemoving ? "Removing..." : "Remove";
 
   return (
@@ -24,8 +23,10 @@ TodoItem.propTypes = {
   todo: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
+    status: PropTypes.oneOf(Object.values(TODO_ENTITY_STATUS)),
     segmentPath: PropTypes.string.isRequired,
   }).isRequired,
+  isRemoving: PropTypes.bool.isRequired,
   handleRemoveTodo: PropTypes.func.isRequired,
 };
 

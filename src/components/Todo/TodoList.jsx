@@ -4,6 +4,8 @@ import CustomLoader from "../Common/loader/CustomLoader";
 import CustomButton from "../Common/button/CustomButton";
 import { useEffect } from "react";
 import PropTypes from "prop-types";
+import { TODO_ENTITY_STATUS } from "../../store/todoSlice";
+import TodoItemContainer from "./TodoItem/TodoItemContainer";
 
 const TodoList = ({
   sortedTodos,
@@ -11,7 +13,6 @@ const TodoList = ({
   nextLoadSegmentPath,
   handleGetAll,
   handleLoadMore,
-  handleRemoveTodo,
 }) => {
   useEffect(() => {
     handleGetAll();
@@ -22,9 +23,7 @@ const TodoList = ({
   ) : null;
 
   const renderListItems = sortedTodos.map((todo) => {
-    return (
-      <TodoItem key={todo.id} todo={todo} handleRemoveTodo={handleRemoveTodo} />
-    );
+    return <TodoItemContainer key={todo.id} todo={todo} />;
   });
 
   const renderLoadMoreButton =
@@ -50,12 +49,18 @@ const TodoList = ({
 };
 
 TodoList.propTypes = {
-  sortedTodos: PropTypes.array.isRequired,
+  sortedTodos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      status: PropTypes.oneOf(Object.values(TODO_ENTITY_STATUS)),
+      segmentPath: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   isLoading: PropTypes.bool.isRequired,
   nextLoadSegmentPath: PropTypes.object,
   handleGetAll: PropTypes.func.isRequired,
   handleLoadMore: PropTypes.func.isRequired,
-  handleRemoveTodo: PropTypes.func.isRequired,
 };
 
 TodoList.defaultProps = {
