@@ -82,8 +82,8 @@ export const selectTodoNextLoadSegmentPath = (state) =>
 export const selectTodoById = (state, todoId) => {
   return selectTodoEntities(state)[todoId];
 };
-export const selectTodoSortedIds = createSelector(selectTodos, (todos) => {
-  return todos.sort((a, b) => b.createdAt - a.createdAt).map((todo) => todo.id);
+export const selectSortedTodos = createSelector(selectTodos, (todos) => {
+  return todos.sort((a, b) => b.createdAt - a.createdAt);
 });
 
 export class TodosThunk {

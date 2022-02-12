@@ -1,45 +1,38 @@
 import classes from "./TodoList.module.css";
 import TodoItem from "./TodoItem/TodoItem";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectTodoSortedIds,
-  selectTodoNextLoadSegmentPath,
-  selectTodoStatus,
-  TodosThunk,
-  TODO_LIST_STATUS,
-} from "../../store/todoSlice";
+import { TODO_LIST_STATUS } from "../../store/todoSlice";
 import CustomLoader from "../Common/loader/CustomLoader";
 import CustomButton from "../Common/button/CustomButton";
 import { useEffect } from "react";
 
-const TodoList = () => {
-  const dispatch = useDispatch();
-  const sortedTodoIds = useSelector(selectTodoSortedIds);
-  const status = useSelector(selectTodoStatus);
-  const nextLoadSegmentPath = useSelector(selectTodoNextLoadSegmentPath);
-
+const TodoList = ({
+  sortedTodos,
+  status,
+  nextLoadSegmentPath,
+  handleGetAll,
+  handleLoadMore,
+  handleRemoveTodo,
+}) => {
   useEffect(() => {
-    dispatch(TodosThunk.getAll());
-  }, [dispatch]);
+    handleGetAll();
+  }, []);
 
   const isLoading = status === TODO_LIST_STATUS.LOADING;
-
-  const handleLoadMore = () => {
-    dispatch(TodosThunk.getAll(nextLoadSegmentPath));
-  };
 
   const renderLoader = isLoading ? (
     <CustomLoader className={`${classes.loadMoreLoader}`} />
   ) : null;
 
-  const renderListItems = sortedTodoIds.map((todoId) => {
-    return <TodoItem key={todoId} id={todoId} />;
+  const renderListItems = sortedTodos.map((todo) => {
+    return (
+      <TodoItem key={todo.id} todo={todo} handleRemoveTodo={handleRemoveTodo} />
+    );
   });
 
-  const loadMoreButton =
+  const renderLoadMoreButton =
     !isLoading && nextLoadSegmentPath ? (
       <CustomButton
-        onClick={handleLoadMore}
+        onClick={() => handleLoadMore(nextLoadSegmentPath)}
         disabled={isLoading}
         className={`${classes.loadMoreButton}`}
       >
@@ -53,7 +46,7 @@ const TodoList = () => {
         {renderListItems}
         {renderLoader}
       </ul>
-      {loadMoreButton}
+      {renderLoadMoreButton}
     </div>
   );
 };

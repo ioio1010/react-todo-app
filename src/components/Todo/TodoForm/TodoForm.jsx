@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import classes from "./TodoForm.module.css";
-import CustomInput from "../Common/input/CustomInput";
+import CustomInput from "../../Common/input/CustomInput";
 import { useDispatch } from "react-redux";
-import { todoAdded } from "../../store/todoSlice";
-import { idGenerator } from "../../utils/idGenerator";
-import { TodoAPI } from "../../api/todoAPI";
-import { firestoreDB } from "../../config/firebaseConfig";
-import CustomButton from "../Common/button/CustomButton";
+import { todoAdded } from "../../../store/todoSlice";
+import { idGenerator } from "../../../utils/idGenerator";
+import { TodoAPI } from "../../../api/todoAPI";
+import { firestoreDB } from "../../../config/firebaseConfig";
+import CustomButton from "../../Common/button/CustomButton";
 
 const TodoForm = () => {
   const TODO_FORM_STATUS = {
