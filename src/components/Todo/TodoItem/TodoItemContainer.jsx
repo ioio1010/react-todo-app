@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { TODO_ENTITY_STATUS, TodosThunk } from "../../../store/todoSlice";
 import { useDispatch } from "react-redux";
 import TodoItem from "./TodoItem";
@@ -7,14 +7,20 @@ import PropTypes from "prop-types";
 const TodoItemContainer = ({ todo }) => {
   const dispatch = useDispatch();
 
-  const todoItemProps = {
-    todo: todo,
-    isRemoving: todo.status === TODO_ENTITY_STATUS.REMOVING,
-    handleRemoveTodo: (todo) => {
-      return dispatch(TodosThunk.remove(todo));
+  const handleRemoveTodo = useCallback(
+    (todo) => {
+      dispatch(TodosThunk.remove(todo));
     },
-  };
-  return <TodoItem {...todoItemProps} />;
+    [todo]
+  );
+
+  return (
+    <TodoItem
+      todo={todo}
+      isRemoving={todo.status === TODO_ENTITY_STATUS.REMOVING}
+      handleRemoveTodo={handleRemoveTodo}
+    />
+  );
 };
 
 TodoItem.propTypes = {

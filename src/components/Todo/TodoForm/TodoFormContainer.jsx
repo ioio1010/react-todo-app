@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import TodoForm from "./TodoForm";
 import { idGenerator } from "../../../utils/idGenerator";
 import { TodoAPI } from "../../../api/todoAPI";
-import { todoAdded } from "../../../store/todoSlice";
+import { todoAdded, TodosThunk } from "../../../store/todoSlice";
 import { useDispatch } from "react-redux";
 
 export const TODO_FORM_STATUS = {
@@ -40,25 +40,40 @@ const TodoFormContainer = () => {
       });
   };
 
-  const todoFormProps = {
-    title: title,
-    isAdding: isAdding,
-    handleChangeTitle: (e) => {
-      return setTitle(e.target.value);
+  const handleChangeTitle = useCallback(
+    (e) => {
+      setTitle(e.target.value);
     },
-    handleKeyDownTitle: (e) => {
+    [title]
+  );
+
+  const handleKeyDownTitle = useCallback(
+    (e) => {
       if (e.which === 13) {
         e.preventDefault();
         addTodo();
       }
     },
-    handleClickAddButton: (e) => {
+    [title]
+  );
+
+  const handleClickAddButton = useCallback(
+    (e) => {
       e.preventDefault();
       addTodo();
     },
-  };
+    [title]
+  );
 
-  return <TodoForm {...todoFormProps} />;
+  return (
+    <TodoForm
+      title={title}
+      isAdding={isAdding}
+      handleChangeTitle={handleChangeTitle}
+      handleKeyDownTitle={handleKeyDownTitle}
+      handleClickAddButton={handleClickAddButton}
+    />
+  );
 };
 
 export default TodoFormContainer;

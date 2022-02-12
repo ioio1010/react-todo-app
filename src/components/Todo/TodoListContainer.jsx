@@ -1,5 +1,6 @@
 import TodoList from "./TodoList";
 import { useDispatch, useSelector } from "react-redux";
+import { useCallback } from "react";
 import {
   selectSortedTodos,
   selectTodoNextLoadSegmentPath,
@@ -14,22 +15,23 @@ const TodoListContainer = () => {
   const status = useSelector(selectTodoStatus);
   const nextLoadSegmentPath = useSelector(selectTodoNextLoadSegmentPath);
 
-  const todoListProps = {
-    sortedTodos: sortedTodos,
-    isLoading: status === TODO_LIST_STATUS.LOADING,
-    nextLoadSegmentPath: nextLoadSegmentPath,
-    handleGetAll: () => {
-      return dispatch(TodosThunk.getAll());
-    },
-    handleLoadMore: () => {
-      return dispatch(TodosThunk.getAll(nextLoadSegmentPath));
-    },
-    handleRemoveTodo: (todo) => {
-      return dispatch(TodosThunk.remove(todo));
-    },
-  };
+  const handleGetAll = useCallback(() => {
+    dispatch(TodosThunk.getAll());
+  }, []);
 
-  return <TodoList {...todoListProps} />;
+  const handleLoadMore = useCallback(() => {
+    dispatch(TodosThunk.getAll(nextLoadSegmentPath));
+  }, [nextLoadSegmentPath]);
+
+  return (
+    <TodoList
+      sortedTodos={sortedTodos}
+      isLoading={status === TODO_LIST_STATUS.LOADING}
+      nextLoadSegmentPath={nextLoadSegmentPath}
+      handleGetAll={handleGetAll}
+      handleLoadMore={handleLoadMore}
+    />
+  );
 };
 
 export default TodoListContainer;

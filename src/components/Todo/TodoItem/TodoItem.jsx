@@ -1,18 +1,20 @@
 import classes from "./TodoItem.module.css";
 import CustomButton from "../../Common/button/CustomButton";
-import { TODO_ENTITY_STATUS } from "../../../store/todoSlice";
+import { TODO_ENTITY_STATUS, TodosThunk } from "../../../store/todoSlice";
 import PropTypes from "prop-types";
+import { useCallback } from "react";
 
 const TodoItem = ({ todo, isRemoving, handleRemoveTodo }) => {
   const removeButtonText = isRemoving ? "Removing..." : "Remove";
 
+  const handleClickRemoveButton = useCallback(() => {
+    handleRemoveTodo(todo);
+  }, [todo]);
+
   return (
     <li className={classes.todoItem}>
       <span className={classes.todoItemTitle}>{todo.title}</span>
-      <CustomButton
-        onClick={() => handleRemoveTodo(todo)}
-        disabled={isRemoving}
-      >
+      <CustomButton onClick={handleClickRemoveButton} disabled={isRemoving}>
         {removeButtonText}
       </CustomButton>
     </li>
