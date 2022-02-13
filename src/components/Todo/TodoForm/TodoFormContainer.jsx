@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import TodoForm from "./TodoForm";
 import { idGenerator } from "../../../utils/idGenerator";
 import { TodoAPI } from "../../../api/todoAPI";
-import { todoAdded, TodosThunk } from "../../../store/todoSlice";
+import { todoAdded } from "../../../store/todoSlice";
 import { useDispatch } from "react-redux";
 
 export const TODO_FORM_STATUS = {
