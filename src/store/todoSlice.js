@@ -90,9 +90,12 @@ export class TodosThunk {
     return async (dispatch) => {
       dispatch(todosLoading());
 
-      TodoAPI.getAll(nextLoadSegmentPath)
-        .then((response) => dispatch(todosLoaded(response)))
-        .catch(() => dispatch(todosLoadedFailure()));
+      try {
+        const response = await TodoAPI.getAll(nextLoadSegmentPath);
+        dispatch(todosLoaded(response));
+      } catch {
+        dispatch(todosLoadedFailure());
+      }
     };
   }
 
@@ -100,9 +103,12 @@ export class TodosThunk {
     return async (dispatch) => {
       dispatch(todoRemoving(todo));
 
-      TodoAPI.remove(todo.segmentPath)
-        .then((response) => dispatch(todoRemoved(todo)))
-        .catch(() => dispatch(todoRemovedFailure()));
+      try {
+        await TodoAPI.remove(todo.segmentPath);
+        dispatch(todoRemoved(todo));
+      } catch {
+        dispatch(todoRemovedFailure());
+      }
     };
   }
 }
